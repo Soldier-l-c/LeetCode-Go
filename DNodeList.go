@@ -41,9 +41,19 @@ func (this *DNodeList) MoveToHead(node *DNode) {
 }
 
 func (this *DNodeList) RemoveLast() *DNode {
+	if this.Emprty() {
+		return nil
+	}
 	node := this.Tail.Pre
 	this.RemoveNode(node)
 	return node
+}
+
+func (this *DNodeList) Last() *DNode {
+	if this.Emprty() {
+		return nil
+	}
+	return this.Tail.Pre
 }
 
 func (this *DNodeList) Emprty() bool {
