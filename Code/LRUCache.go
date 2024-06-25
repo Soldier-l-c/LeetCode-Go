@@ -7,7 +7,7 @@ type LRUCache struct {
 	CurSize  int
 }
 
-func Constructor(capacity int) LRUCache {
+func Constructor1(capacity int) LRUCache {
 	var lrc_cache LRUCache
 	lrc_cache.NodeList.Init()
 	lrc_cache.MaxCapa = capacity
