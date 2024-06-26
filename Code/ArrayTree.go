@@ -1,10 +1,5 @@
 package Code
 
-type NumArray struct {
-	nums []int
-	t    TreeArry
-}
-
 type TreeArry struct {
 	tree []int
 	n    int
@@ -22,6 +17,7 @@ func (this *TreeArry) Init(nums []int) {
 	}
 }
 
+// index从1开始，1-n
 func (this *TreeArry) Add(index, val int) {
 	for index < this.n {
 		this.tree[index] += val
@@ -29,6 +25,7 @@ func (this *TreeArry) Add(index, val int) {
 	}
 }
 
+// index从1开始，1-n
 func (this *TreeArry) PrefixSum(index int) int {
 	res := 0
 	for index > 0 {
@@ -36,20 +33,4 @@ func (this *TreeArry) PrefixSum(index int) int {
 		index -= lowBit(index)
 	}
 	return res
-}
-
-func Constructor(nums []int) NumArray {
-	var a NumArray
-	a.nums = nums
-	a.t.Init(a.nums)
-	return a
-}
-
-func (this *NumArray) Update(index int, val int) {
-	this.t.Add(index+1, val-this.nums[index])
-	this.nums[index] = val
-}
-
-func (this *NumArray) SumRange(left int, right int) int {
-	return this.t.PrefixSum(right+1) - this.t.PrefixSum(left)
 }

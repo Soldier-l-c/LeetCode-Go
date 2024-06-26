@@ -101,6 +101,43 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 	return res_head
 }
 
+type NumArray struct {
+	st     SegmentTree
+	at     TreeArry
+	nums   []int
+	use_at bool
+}
+
+func Constructor(nums []int) NumArray {
+	var a NumArray
+	a.use_at = true
+	if !a.use_at {
+		a.st.Init(nums)
+	} else {
+		a.at.Init(nums)
+		a.nums = nums
+	}
+
+	return a
+}
+
+func (this *NumArray) Update(index int, val int) {
+	if this.use_at {
+		this.at.Add(index+1, val-this.nums[index])
+		this.nums[index] = val
+	} else {
+		this.st.Update(index, val)
+	}
+}
+
+func (this *NumArray) SumRange(left int, right int) int {
+	if this.use_at {
+		return this.at.PrefixSum(right+1) - this.at.PrefixSum(left)
+	} else {
+		return this.st.SumRange(left, right)
+	}
+}
+
 func LeetCodeTest() {
 	lfu_cache := Constructor1(10)
 	lfu_cache.Put(10, 1)
